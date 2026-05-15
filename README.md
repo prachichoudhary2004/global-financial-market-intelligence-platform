@@ -147,4 +147,3 @@ python -m streamlit run dashboard/streamlit/app.py
 
 ---
 
-*Developed as a flagship Analytics Engineering and Quantitative Finance portfolio project.*
