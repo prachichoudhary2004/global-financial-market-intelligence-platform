@@ -1,4 +1,4 @@
-# Global Financial Market Intelligence Platform
+# Global Financial Market Intelligence Platform 
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
 ![PySpark](https://img.shields.io/badge/PySpark-Data_Engineering-orange?logo=apachespark)
