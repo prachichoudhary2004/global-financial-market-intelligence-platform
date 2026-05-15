@@ -112,7 +112,9 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # --- UTILITIES ---
-GOLD_PATH = "global-financial-market-intelligence-platform/data/gold"
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(CURRENT_DIR))
+GOLD_PATH = os.path.join(BASE_DIR, "data", "gold")
 
 @st.cache_data
 def get_market_kpis():
@@ -322,8 +324,10 @@ def page_stock_explorer(df):
 
 @st.cache_resource(show_spinner=False)
 def get_or_train_models(symbol, _df):
-    prophet_path = f"global-financial-market-intelligence-platform/models/forecasting/{symbol}_prophet.joblib"
-    xgb_path = f"global-financial-market-intelligence-platform/models/forecasting/{symbol}_xgb.joblib"
+    CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+    BASE_DIR = os.path.dirname(os.path.dirname(CURRENT_DIR))
+    prophet_path = os.path.join(BASE_DIR, "models", "forecasting", f"{symbol}_prophet.joblib")
+    xgb_path = os.path.join(BASE_DIR, "models", "forecasting", f"{symbol}_xgb.joblib")
     
     if os.path.exists(prophet_path) and os.path.exists(xgb_path):
         return joblib.load(prophet_path), joblib.load(xgb_path)
