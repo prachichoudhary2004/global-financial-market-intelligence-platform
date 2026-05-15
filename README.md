@@ -54,6 +54,7 @@ Built for scale and production readiness:
 
 ## 📂 Project Architecture
 
+### Directory Structure
 ```text
 global-financial-market-intelligence-platform/
 ├── data/
@@ -74,6 +75,48 @@ global-financial-market-intelligence-platform/
 │       └── app.py       (Main UI / Quant Engine Application)
 ├── DASHBOARD_WORKFLOW.md  (Detailed documentation of UI capabilities)
 └── README.md
+```
+
+### Data Pipeline Flow (Medallion Architecture)
+```mermaid
+graph TD
+    A[Raw Market Data CSV / Live APIs] -->|Ingestion| B[(Bronze Layer)]
+    B -->|PySpark / Pandas Cleaning & Typing| C[(Silver Layer)]
+    C -->|Feature Engineering & KPI Aggregation| D[(Gold Layer)]
+    D -->|Rolling Risk Indicators| E[SQL Analytical Views]
+    D -->|Historical Returns Matrix| F[Quant Portfolio Optimizer]
+    D -->|Technical Features| G[Machine Learning Ensemble]
+    
+    E --> H[Institutional Dashboard]
+    F --> H
+    G --> H
+```
+
+### System Architecture
+```mermaid
+graph LR
+    subgraph Presentation Layer
+    UI[Streamlit Terminal UI]
+    end
+    
+    subgraph Decision Intelligence Engine
+    Quant[SciPy Markowitz Optimizer]
+    ML[XGBoost & Prophet Forecaster]
+    NLP[News Sentiment Analyzer]
+    end
+    
+    subgraph Medallion Data Lakehouse
+    Gold[(Gold Parquet KPIs)]
+    Silver[(Silver Parquet Time-Series)]
+    end
+    
+    UI <-->|Lazy Load Triggers| Quant
+    UI <-->|On-the-fly Training| ML
+    UI <-->|Dashboard Metrics| NLP
+    
+    Quant <-->|Covariance Matrices| Gold
+    ML <-->|Feature Vectors| Gold
+    NLP <-->|Pre-processed Text| Gold
 ```
 
 ---
