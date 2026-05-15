@@ -126,12 +126,23 @@ global-financial-market-intelligence-platform/
 └── README.md
 ```
 
-### Medallion Architecture Overview
+### 🏛️ Medallion Architecture Overview
 
-The system employs a robust **Medallion Data Lakehouse Architecture** to guarantee data quality and fast analytical reads:
-*   **🥉 Bronze Layer**: Ingests raw, unstructured CSVs and live API JSON responses directly into the data lake without modification.
-*   **🥈 Silver Layer**: Utilizes PySpark (with Pandas fallback) to cleanse, normalize, enforce schemas, and convert data into highly compressed, columnar Parquet formats.
-*   **🥇 Gold Layer**: Produces business-level, aggregated KPIs and complex analytical views (e.g., rolling volatility, sector momentum) ready for immediate consumption by the Streamlit dashboard and quantitative models.
+The platform strictly adheres to the Databricks Medallion Data Lakehouse design pattern, ensuring that data is progressively refined, validated, and optimized for high-performance quantitative analytics.
+
+*   **🥉 Bronze Layer (Raw & Immutable)**
+    *   **Purpose**: Acts as the centralized landing zone for raw, unstructured or semi-structured data (e.g., CSV datasets, API JSON payloads). 
+    *   **Process**: Data is ingested directly without any modification or schema enforcement, preserving the original state as a reliable historical source of truth.
+
+*   **🥈 Silver Layer (Cleansed & Conformed)**
+    *   **Purpose**: Creates a filtered, standardized, and highly performant data foundation.
+    *   **Process**: Utilizes distributed PySpark pipelines (with robust Pandas fallbacks) to process Bronze data. It enforces strict data typing, handles missing values, normalizes date structures, and standardizes schemas. 
+    *   **Storage**: The refined data is written to disk as highly compressed, columnar Parquet files (`.parquet`), drastically reducing downstream I/O latency.
+
+*   **🥇 Gold Layer (Curated & Aggregated)**
+    *   **Purpose**: Delivers business-ready data structures tailored specifically for the UI and ML engines.
+    *   **Process**: Silver tables are joined and heavily aggregated. This layer computes complex financial metrics—such as rolling volatilities, 50/200-day moving averages, sector momentum rankings, and historical return covariance matrices. 
+    *   **Storage**: The output consists of specialized Parquet files that are immediately ready for low-latency consumption by the Streamlit dashboard, SciPy Quantitative Optimizer, and ML forecasting models.
 
 ### Data Pipeline Flow
 ```mermaid
@@ -176,6 +187,18 @@ graph LR
     ML <-->|Feature Vectors| Gold
     NLP <-->|Pre-processed Text| Gold
 ```
+
+---
+
+### 🔄 System Workflow
+
+The end-to-end operation of the platform follows a streamlined, automated workflow designed for maximum efficiency:
+
+1.  **Data Orchestration**: The centralized `main.py` script acts as the primary orchestrator. It triggers the ETL pipelines, cascading data sequentially from the Bronze layer through to the final Gold layer.
+2.  **Model Serialization**: Once the Gold data is generated, the orchestrator triggers the machine learning pipelines. The XGBoost anomaly detection and Prophet forecasting models are trained on the latest technical features and saved as serialized `.joblib` artifacts for rapid downstream loading.
+3.  **Application Initialization**: The user launches the Streamlit dashboard (`app.py`). Upon initialization, the application seamlessly loads the highly-compressed Gold layer Parquet files and the serialized ML models into system memory.
+4.  **Interactive Analytics & Inference**: As the user navigates the platform (e.g., analyzing a specific stock or building a portfolio), the application performs lightning-fast data retrieval. It executes on-the-fly portfolio optimization algorithms (Markowitz) and generates instant AI forecasts without requiring expensive re-computation.
+5.  **Live Market Syncing**: Users can dynamically update their analytical context by triggering the live `yfinance` integration within the UI. This action fetches the latest market prints and merges them with the historical data lake in real-time, instantly refreshing all dashboard insights.
 
 ---
 
