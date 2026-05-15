@@ -13,6 +13,19 @@ By leveraging a **Medallion Data Lakehouse Architecture**, advanced **Ensemble M
 
 ---
 
+## 📸 Dashboard Previews
+
+### Morning Executive Briefing
+![Morning Briefing Dashboard](assets/morning_briefing_dashboard.png)
+
+### Stock Explorer & Technical Analysis
+![Stock Explorer Dashboard](assets/stock_explorer_dashboard.png)
+
+### Quantitative Portfolio Optimization
+![Portfolio Optimization Dashboard](assets/portfolio_risk_dashboard.png)
+
+---
+
 ## 🌟 Elite Features & Capabilities
 
 ### 📈 1. Quantitative Portfolio Optimization
