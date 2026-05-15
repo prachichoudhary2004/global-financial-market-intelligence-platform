@@ -15,16 +15,16 @@ By leveraging a **Medallion Data Lakehouse Architecture**, advanced **Ensemble M
 
 ## 📸 Dashboard Previews
 
-### Morning Executive Briefing
-![Morning Briefing Dashboard](assets/morning_briefing_dashboard.png)
+<img width="1920" height="912" alt="Screenshot (735)" src="https://github.com/user-attachments/assets/0499bfd9-ae84-48b7-8cdc-03d304e53a8c" />
 
-### Stock Explorer & Technical Analysis
-![Stock Explorer Dashboard](assets/stock_explorer_dashboard.png)
+<img width="1920" height="917" alt="Screenshot (736)" src="https://github.com/user-attachments/assets/2d0e03c3-f176-48f5-b94e-ec4a71ea5727" />
 
-### Quantitative Portfolio Optimization
-![Portfolio Optimization Dashboard](assets/portfolio_risk_dashboard.png)
+<img width="1920" height="908" alt="Screenshot (738)" src="https://github.com/user-attachments/assets/fa4c1b8a-4b6a-4e22-b5b3-18b061881678" />
+
+<img width="1920" height="900" alt="Screenshot (739)" src="https://github.com/user-attachments/assets/0609321a-8dbf-4880-a366-a52371ee5dfd" />
 
 ---
+
 
 ## 🌟 Elite Features & Capabilities
 
@@ -90,6 +90,8 @@ global-financial-market-intelligence-platform/
 └── README.md
 ```
 
+---
+
 ### Data Pipeline Flow (Medallion Architecture)
 ```mermaid
 graph TD
@@ -104,6 +106,8 @@ graph TD
     F --> H
     G --> H
 ```
+
+---
 
 ### System Architecture
 ```mermaid
