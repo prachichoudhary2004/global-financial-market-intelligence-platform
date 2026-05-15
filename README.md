@@ -7,7 +7,7 @@
 ![Prophet](https://img.shields.io/badge/Prophet-Time_Series-4B8BBE)
 ![Scipy](https://img.shields.io/badge/SciPy-Quant_Optimization-8CAAE6)
 
-The **Global Financial Market Intelligence Platform** is a high-end, institutional-grade quantitative analytics system designed to simulate the capabilities of an enterprise research workstation (similar to a Bloomberg Terminal). 
+The **Global Financial Market Intelligence Platform** is a high-end, institutional-grade quantitative analytics system designed to simulate the capabilities of an enterprise research workstation. 
 
 By leveraging a **Medallion Data Lakehouse Architecture**, advanced **Ensemble Machine Learning**, and **Quantitative Portfolio Optimization**, the platform transforms raw market data into actionable, decision-intelligence insights.
 
