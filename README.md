@@ -7,7 +7,17 @@
 ![Prophet](https://img.shields.io/badge/Prophet-Time_Series-4B8BBE)
 ![Scipy](https://img.shields.io/badge/SciPy-Quant_Optimization-8CAAE6)
 
-The **Global Financial Market Intelligence Platform** is a high-end, institutional-grade quantitative analytics system designed to simulate the capabilities of an enterprise research workstation. 
+The **Global Financial Market Intelligence Platform** is a high-end, institutional-grade quantitative analytics system designed to simulate the capabilities of an enterprise research workstation. The entire frontend is proudly **deployed using Streamlit**, providing a blazing-fast, responsive, and beautifully designed user interface.
+
+### 🎯 Core Objectives
+*   **Democratize Quantitative Finance**: Provide retail investors and analysts with institutional-grade tools (e.g., Markowitz Optimization, Monte Carlo Simulations) typically reserved for elite hedge funds.
+*   **Unify Disparate Data Streams**: Seamlessly integrate and analyze traditional equities, cryptocurrencies, macroeconomic sentiment, and fundamental data in one cohesive environment.
+*   **Provide Actionable Intelligence**: Move beyond static charts by implementing explainable AI that generates concrete, data-backed buy/sell signals and risk assessments.
+
+### 🚀 Technical Goals
+*   Implement a robust, scalable **Medallion Data Architecture** (Bronze, Silver, Gold) capable of processing massive datasets using PySpark and Advanced SQL.
+*   Build a "Super Ensemble" Machine Learning engine utilizing Prophet and XGBoost for dynamic, on-the-fly time-series forecasting.
+*   Ensure lightning-fast UI responsiveness by leveraging lazy loading, caching, and efficient vectorized operations via NumPy and Pandas.
 
 By leveraging a **Medallion Data Lakehouse Architecture**, advanced **Ensemble Machine Learning**, and **Quantitative Portfolio Optimization**, the platform transforms raw market data into actionable, decision-intelligence insights.
 
@@ -54,6 +64,32 @@ Built for scale and production readiness:
 
 ---
 
+## 📊 Datasets Used
+
+The platform ingests and processes multiple robust datasets to form a comprehensive macro and micro financial view. These raw files reside in the `data/bronze/` layer before being systematically processed through the Medallion architecture.
+
+1. **S&P 500 Historical Stock Data (`all_stocks_5yr.csv`)**
+   * **Source**: [Kaggle - S&P 500 stock data](https://www.kaggle.com/datasets/camnugent/sandp500)
+   * **Content**: 5 years of daily historical price action (Open, High, Low, Close, Volume) for top S&P 500 equities.
+   * **Usage**: Forms the core backbone of technical indicator engineering, quantitative portfolio optimization (Markowitz), and base feature sets for the XGBoost/Prophet forecasting engines.
+
+2. **Cryptocurrency Historical Prices (`crypto_prices.csv`)**
+   * **Source**: [Kaggle - Cryptocurrency Historical Prices](https://www.kaggle.com/datasets/sudalairajkumar/cryptocurrencypricehistory)
+   * **Content**: Daily historical price records and market data for major cryptocurrencies.
+   * **Usage**: Provides alternative asset class data to analyze cross-asset correlations, extending the platform's analytical capabilities beyond traditional equities.
+
+3. **Financial News Sentiment Data (`all-data.csv`)**
+   * **Source**: [Kaggle - Sentiment Analysis for Financial News](https://www.kaggle.com/datasets/ankurzing/sentiment-analysis-for-financial-news)
+   * **Content**: Thousands of financial news headlines labeled with qualitative sentiment (Positive, Negative, Neutral).
+   * **Usage**: Enables the parsing of market sentiment, providing a contextual narrative to raw price action that is integrated directly into the dashboard's Executive Insight Engine.
+
+4. **Company Fundamentals (`fundamentals.csv`)**
+   * **Source**: [Kaggle - New York Stock Exchange (Fundamentals)](https://www.kaggle.com/datasets/dgawlik/nyse)
+   * **Content**: Key corporate financial metrics, earnings data, and basic structural information.
+   * **Usage**: Ingested to allow the cross-referencing of fundamental health against technical momentum, providing a more holistic view of asset valuation.
+
+---
+
 ## 🛠️ Technology Stack
 
 *   **Data Engineering**: PySpark, Pandas, Parquet, Advanced SQL
@@ -90,9 +126,14 @@ global-financial-market-intelligence-platform/
 └── README.md
 ```
 
----
+### Medallion Architecture Overview
 
-### Data Pipeline Flow (Medallion Architecture)
+The system employs a robust **Medallion Data Lakehouse Architecture** to guarantee data quality and fast analytical reads:
+*   **🥉 Bronze Layer**: Ingests raw, unstructured CSVs and live API JSON responses directly into the data lake without modification.
+*   **🥈 Silver Layer**: Utilizes PySpark (with Pandas fallback) to cleanse, normalize, enforce schemas, and convert data into highly compressed, columnar Parquet formats.
+*   **🥇 Gold Layer**: Produces business-level, aggregated KPIs and complex analytical views (e.g., rolling volatility, sector momentum) ready for immediate consumption by the Streamlit dashboard and quantitative models.
+
+### Data Pipeline Flow
 ```mermaid
 graph TD
     A[Raw Market Data CSV / Live APIs] -->|Ingestion| B[(Bronze Layer)]
@@ -145,6 +186,9 @@ graph LR
 # Clone the repository
 git clone https://github.com/yourusername/global-financial-market-intelligence-platform.git
 cd global-financial-market-intelligence-platform
+
+# Ensure that the dataset files are correctly placed in data/bronze/
+# (e.g., all_stocks_5yr.csv, crypto_prices.csv, all-data.csv, fundamentals.csv)
 
 # Install requirements
 pip install -r requirements.txt
